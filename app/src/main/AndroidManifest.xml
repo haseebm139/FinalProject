@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".User_Dashboard"></activity>
+        <activity android:name=".ForgetPassActivity"></activity>
+        <activity android:name=".User_Dashboard" />
         <activity android:name=".ServiceRegActivity" />
         <activity android:name=".ServiceLoginActivity" />
         <activity android:name=".RegistrationActivity" />
