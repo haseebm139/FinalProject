@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void reg_btn(View view) {
-        Intent it = new Intent(MainActivity.this,User_Dashboard.class);
+        Intent it = new Intent(MainActivity.this,loginActivity.class);
         startActivity(it);
     }
 }

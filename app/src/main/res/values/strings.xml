@@ -14,4 +14,6 @@
     <string name="gender">Gender</string>
     <string name="send">Send</string>
     <string name="todo">TODO</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
 </resources>
