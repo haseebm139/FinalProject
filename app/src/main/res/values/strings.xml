@@ -16,4 +16,5 @@
     <string name="todo">TODO</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="_100">100</string>
 </resources>
