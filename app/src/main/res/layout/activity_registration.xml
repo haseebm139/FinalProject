@@ -227,6 +227,7 @@
             >
 
             <EditText
+                android:id="@+id/fname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -242,6 +243,7 @@
             android:focusableInTouchMode="true">
 
             <EditText
+                android:id="@+id/lname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -257,10 +259,11 @@
             android:focusableInTouchMode="true">
 
             <EditText
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:textSize="15sp"
                 android:hint="@string/email" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -273,10 +276,10 @@
             app:passwordToggleEnabled="true">
 
             <EditText
+                android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
                 android:textSize="15sp"
                 android:hint="@string/password" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -286,24 +289,28 @@
             android:layout_height="wrap_content"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            >
 
             <EditText
+                android:id="@+id/cpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+
                 android:textSize="15sp"
                 android:hint="@string/confirm_password"
                 android:importantForAutofill="no" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
+            android:id="@+id/radioGro"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/genderTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gender"
@@ -314,6 +321,7 @@
             </TextView>
 
             <RadioButton
+                android:id="@+id/maleRb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/male"
@@ -322,6 +330,7 @@
 
             </RadioButton>
             <RadioButton
+                android:id="@+id/femaleRb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/female"
@@ -330,17 +339,33 @@
 
             </RadioButton>
         </RadioGroup>
-
-        <Button
+        <ProgressBar
+            android:id="@+id/proBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:visibility="invisible"
+            />
+
+        <Button
+            android:id="@+id/btnSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="@string/submit"
             android:textColor="#FFFFFF"
             android:textSize="23sp"
             android:onClick="submit_btn"
             android:background="@drawable/button_rounded"
             />
+
+        <TextView
+            android:id="@+id/loginTv"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#FF0000"
+            android:text="Already Signed In ? Login Here"/>
 
 
 
