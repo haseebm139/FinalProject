@@ -164,13 +164,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            mPbar.setVisibility(View.GONE);
+                            mPbar.setVisibility(View.VISIBLE);
                             if (task.isSuccessful()) {
                                 Intent it = new Intent(RegistrationActivity.this,loginActivity.class);
                                 it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(it);
                             } else {
                                 Toast.makeText(RegistrationActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
+                                mPbar.setVisibility(View.GONE);
                             }
 
 

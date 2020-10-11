@@ -1,7 +1,12 @@
 package com.example.final_project;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -12,6 +17,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class User_Dashboard extends AppCompatActivity {
 
@@ -19,6 +25,7 @@ public class User_Dashboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
+    private Button signOBtn;
 
 
 
@@ -31,12 +38,17 @@ public class User_Dashboard extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation);
         drawer = findViewById(R.id.drawer);
 
+        signOBtn = (Button) findViewById(R.id.signOutBtn);
+
 
         setSupportActionBar(toolbar);
 
         toggle = new ActionBarDrawerToggle(this,drawer,toolbar,R.string.open,R.string.close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+
+
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -56,6 +68,16 @@ public class User_Dashboard extends AppCompatActivity {
             }
         });
 
+        signOBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(User_Dashboard.this,loginActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                //startActivity(new Intent(this,loginActivity.class));
+            }
+        });
+
        /* View view = navigationView.getHeaderView(0);
         TextView email = findViewById(R.id.email);
         TextView name = findViewById(R.id.name);
@@ -71,6 +93,25 @@ public class User_Dashboard extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.logout_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuLogout:
+                FirebaseAuth.getInstance().signOut();
+                finish();
+                startActivity(new Intent(this,loginActivity.class));
+        }
+        return true;
+    }
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
@@ -79,6 +120,7 @@ public class User_Dashboard extends AppCompatActivity {
         else {
             super.onBackPressed();
         }
+
 
     }
 }
