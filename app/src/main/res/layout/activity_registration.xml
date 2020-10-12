@@ -401,8 +401,6 @@
             android:textColor="#FF0000"
             android:text="Already Signed In ? Login Here"/>
 
-
-
     </LinearLayout>
 
 </ScrollView>
