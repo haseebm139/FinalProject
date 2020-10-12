@@ -25,7 +25,7 @@ public class User_Dashboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private Button signOBtn;
+
 
 
 
@@ -38,7 +38,6 @@ public class User_Dashboard extends AppCompatActivity {
         navigationView = findViewById(R.id.navigation);
         drawer = findViewById(R.id.drawer);
 
-        signOBtn = (Button) findViewById(R.id.signOutBtn);
 
 
         setSupportActionBar(toolbar);
@@ -68,15 +67,6 @@ public class User_Dashboard extends AppCompatActivity {
             }
         });
 
-        signOBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(User_Dashboard.this,loginActivity.class);
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                //startActivity(new Intent(this,loginActivity.class));
-            }
-        });
 
        /* View view = navigationView.getHeaderView(0);
         TextView email = findViewById(R.id.email);

@@ -280,6 +280,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:inputType="textPassword"
                 android:textSize="15sp"
                 android:hint="@string/password" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -297,7 +298,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-
+                android:inputType="textPassword"
                 android:textSize="15sp"
                 android:hint="@string/confirm_password"
                 android:importantForAutofill="no" />
@@ -354,7 +355,6 @@
             android:text="@string/submit"
             android:textColor="#FFFFFF"
             android:textSize="23sp"
-            android:onClick="submit_btn"
             android:background="@drawable/button_rounded"
             />
 
