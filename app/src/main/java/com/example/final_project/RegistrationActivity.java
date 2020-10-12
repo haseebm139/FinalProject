@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText mEmail, mPassword, mCpassword, mFname, mLname;
+    private EditText mEmail, mPassword, mCpassword, mFname, mLname, mNumber, mDOB ;
     private Button mSubmitbtn;
     private ProgressBar mPbar;
     private TextView mLogintv;
@@ -53,6 +53,8 @@ public class RegistrationActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.email);
         mFname = findViewById(R.id.fname);
         mLname = findViewById(R.id.lname);
+        mNumber = findViewById(R.id.phNo);
+        mDOB = findViewById(R.id.dob);
         mPassword = findViewById(R.id.password);
         mCpassword = findViewById(R.id.cpassword);
         mLogintv = findViewById(R.id.loginTv);
@@ -94,7 +96,9 @@ public class RegistrationActivity extends AppCompatActivity {
         final String cpassword = mCpassword.getText().toString().trim();
         final String lname = mLname.getText().toString().trim();
         final String fname = mFname.getText().toString().trim();
-        final String age;
+        final String phoneNo = mNumber.getText().toString().trim();
+        final String date_of_birth = mDOB.getText().toString().trim();
+
         int cheakedId = mRadioGro.getCheckedRadioButtonId();
         RadioButton selected_gender = mRadioGro.findViewById(cheakedId);
 
@@ -140,6 +144,18 @@ public class RegistrationActivity extends AppCompatActivity {
             mEmail.requestFocus();
             return;
         }
+        if (TextUtils.isEmpty(phoneNo)){
+            mEmail.setError("Phone is Required");
+            mEmail.requestFocus();
+            return;
+        }
+        if (TextUtils.isEmpty(date_of_birth)){
+            mEmail.setError("Date of Birth is Required");
+            mEmail.requestFocus();
+            return;
+        }
+
+
 
         mPbar.setVisibility(View.VISIBLE);
 
@@ -156,8 +172,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     hashMap.put("userId",userId);
                     hashMap.put("firstname",fname);
                     hashMap.put("lastname",lname);
+                    hashMap.put("phoneNumber",phoneNo);
+                    hashMap.put("date_of_birth",date_of_birth);
                     //hashMap.put("age",age);  //for age
-                    //hashMap.put("userId",);   // for phone number
                     hashMap.put("imageURL","default");
 
                      mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {

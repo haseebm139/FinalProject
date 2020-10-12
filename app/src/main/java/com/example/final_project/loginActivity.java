@@ -71,12 +71,18 @@ public class loginActivity extends AppCompatActivity{
 
                 if (TextUtils.isEmpty(email)) {
                     mEmail.setError("Email is Required");
+                    mEmail.requestFocus();
+                    return;
                 }
                 if (TextUtils.isEmpty(password)) {
                     mPassword.setError("Email is Required");
+                    mPassword.requestFocus();
+                    return;
                 }
                 if (password.length() < 8) {
                     mPassword.setError("Password Must be 8 Characters");
+                    mPassword.requestFocus();
+                    return;
                 }
                 // authentication the user
                 mPbar.setVisibility(View.VISIBLE);
@@ -86,10 +92,10 @@ public class loginActivity extends AppCompatActivity{
                         mPbar.setVisibility(View.GONE);
 
                         if (task.isSuccessful()) {
-
-                            //it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |//Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(new Intent(getApplicationContext(),User_Dashboard.class));
-                            //finish();
+                            Intent it = new Intent(getApplicationContext(),User_Dashboard.class);
+                            it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(it);
+                            finish();
                         } else {
                             Toast.makeText(loginActivity.this,"Error !"+ task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             mPbar.setVisibility(View.GONE);
