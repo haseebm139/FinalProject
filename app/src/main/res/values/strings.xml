@@ -22,4 +22,5 @@
     <string name="don_t_have_account">Don\'t have account...</string>
     <string name="logout">Logout</string>
     <string name="Number">Number</string>
+    <string name="date_of_birth">Date of birth</string>
 </resources>
