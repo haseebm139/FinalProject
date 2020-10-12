@@ -232,7 +232,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/first_name"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -247,7 +247,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="textPersonName"
                 android:textSize="15sp"
                 android:hint="@string/last_name" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -266,6 +266,23 @@
                 android:inputType="textEmailAddress"
                 android:textSize="15sp"
                 android:hint="@string/email" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+
+            <EditText
+                android:id="@+id/phNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/Number"
+                android:inputType="text"
+                android:textSize="15sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
