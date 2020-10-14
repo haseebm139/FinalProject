@@ -3,6 +3,7 @@ package com.example.final_project;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Build;
@@ -39,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private TextView mLogintv;
     private RadioGroup mRadioGro;
     private RadioButton mRadioBtn;
-
+    private Toolbar toolbar;
     private FirebaseAuth mAuth;
     private DatabaseReference mReference;
 
@@ -49,6 +50,8 @@ public class RegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+        toolbar = findViewById(R.id.toolbar);
+
 
         mEmail = findViewById(R.id.email);
         mFname = findViewById(R.id.fname);
@@ -64,6 +67,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
         mPbar = findViewById(R.id.proBar);
         mAuth = FirebaseAuth.getInstance();
+
+        setSupportActionBar(toolbar);
+
 
         // if User Already log in
         if(mAuth.getCurrentUser() != null) {
