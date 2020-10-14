@@ -24,4 +24,9 @@
     <string name="Number">Number</string>
     <string name="date_of_birth">Date of birth</string>
     <string name="already_signed_in_login_here">Already Signed In ? Login Here</string>
+    <string name="reset">Reset</string>
+    <string name="tou_will_receive_an_email_to_reset_password">Tou Will Receive an Email To Reset Password</string>
+    <string name="forNewAccount">\"This is not an register Email, you can crate new account \"</string>
+    <string name="change_password">Change Password</string>
+    <string name="new_password">New Password</string>
 </resources>

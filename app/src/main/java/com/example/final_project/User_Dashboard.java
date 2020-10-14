@@ -98,6 +98,8 @@ public class User_Dashboard extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(this,loginActivity.class));
+            case R.id.changePassword:
+                startActivity(new Intent(this,ChangePassword.class));
         }
         return true;
     }

@@ -1,69 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="30dp"
-    android:paddingBottom="30dp"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
     android:background="#FF0000"
-    tools:context=".ForgetPassActivity">
 
+    tools:context=".ForgetPassActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/reg_rounded_layout"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="250dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="30dp"
-            android:src="@drawable/lock"
-            android:contentDescription="@string/todo">
-
-        </ImageView>
-
-        <com.google.android.material.textfield.TextInputLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:focusable="true"
-            android:focusableInTouchMode="true">
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
 
-            <EditText
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/email"
-                android:inputType="textEmailAddress"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:background="#FF0000"
+                app:title="Reset Password"
+                android:popupTheme="@style/AppTheme" />
 
-        <Button
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:textAlignment="center"
-            android:background="@drawable/button_rounded"
-            android:text="@string/send"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            >
-
-        </Button>
-
+        </com.google.android.material.appbar.AppBarLayout>
 
     </LinearLayout>
 
-</ScrollView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF0000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
+            android:paddingTop="40dp"
+            android:paddingRight="30dp"
+            android:paddingBottom="50dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/reg_rounded_layout"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <ImageView
+                    android:layout_width="250dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="30dp"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/lock">
+
+                </ImageView>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
+
+
+                    <EditText
+                        android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:hint="@string/email"
+                        android:inputType="textEmailAddress" />
+                </com.google.android.material.textfield.TextInputLayout>
+                <ProgressBar
+                    android:id="@+id/proBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:targetApi="LOLLIPOP"
+                   />
+
+                <Button
+                    android:id="@+id/rSetBtn"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/button_rounded"
+                    android:text="@string/reset"
+                    android:textAlignment="center"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp">
+
+                </Button>
+                <TextView
+                    android:id="@+id/resetTv"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/tou_will_receive_an_email_to_reset_password"
+                    android:layout_gravity="center"
+                    android:textColor="#FF0000"/>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+</LinearLayout>
