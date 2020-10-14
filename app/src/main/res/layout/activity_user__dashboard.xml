@@ -127,7 +127,7 @@
                             android:layout_marginTop="30dp"
                             android:text="Completed"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -157,7 +157,7 @@
                             android:layout_marginTop="30dp"
                             android:text="Active"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -187,7 +187,7 @@
                             android:layout_marginTop="30dp"
                             android:text="Pending"
                             android:textColor="#000000"
-                            android:textSize="15sp" />
+                            android:textSize="12sp" />
 
                     </androidx.cardview.widget.CardView>
 
