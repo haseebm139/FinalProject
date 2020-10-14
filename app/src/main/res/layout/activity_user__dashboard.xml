@@ -25,6 +25,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FF0000"
+                app:title="Home"
                 android:popupTheme="@style/AppTheme"/>
 
         </com.google.android.material.appbar.AppBarLayout>
