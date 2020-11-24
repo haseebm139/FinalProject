@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class User_Dashboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
+            TextView textName;
 
 
 
@@ -37,7 +39,9 @@ public class User_Dashboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigation);
         drawer = findViewById(R.id.drawer);
+        textName = findViewById(R.id.textName);
 
+        textName.setText(GlobalV.currentUser.firstName);
 
 
         setSupportActionBar(toolbar);
@@ -98,8 +102,8 @@ public class User_Dashboard extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(this,loginActivity.class));
-            case R.id.changePassword:
-                startActivity(new Intent(this,ChangePassword.class));
+           /* case R.id.changePassword:
+                startActivity(new Intent(this,ForgetPassActivity.class));*/
         }
         return true;
     }

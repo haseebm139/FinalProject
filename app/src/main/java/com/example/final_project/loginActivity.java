@@ -17,9 +17,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class loginActivity extends AppCompatActivity{
-    private EditText mEmail , mPassword  ;
+    private EditText mEmail , mPassword ;
     private Button mloginbtn;
     private TextView regTv, forgetTv;
     private ProgressBar mPbar;
@@ -89,6 +93,19 @@ public class loginActivity extends AppCompatActivity{
                         mPbar.setVisibility(View.GONE);
 
                         if (task.isSuccessful()) {
+                            FirebaseDatabase.getInstance().getReference("User")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            GlobalV.currentUser = snapshot.getValue(User.class);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
                             Intent it = new Intent(getApplicationContext(),User_Dashboard.class);
                             it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(it);
