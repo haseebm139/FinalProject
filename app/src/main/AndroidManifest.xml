@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".helper_dashboard"></activity>
         <activity android:name=".ChangePassword" />
-        <activity android:name=".ForgetPassActivity" />
         <activity android:name=".User_Dashboard" />
         <activity android:name=".ServiceRegActivity" />
         <activity android:name=".ServiceLoginActivity" />
