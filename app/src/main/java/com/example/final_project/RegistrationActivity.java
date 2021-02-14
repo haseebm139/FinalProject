@@ -209,8 +209,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-
-
                     /*User user = new User(userFName, userLName , userEmail , userPhNumber, userAge);
                     FirebaseDatabase.getInstance().getReference(user)
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
