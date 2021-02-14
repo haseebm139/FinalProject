@@ -43,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
     private DatabaseReference mReference;
+    private FirebaseDatabase rootNode;
 
 
 
@@ -81,12 +82,19 @@ public class RegistrationActivity extends AppCompatActivity {
         mSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*rootNode = FirebaseDatabase.getInstance();
+                mReference = rootNode.getReference() ;
+                //Get Al the Values
+                String fname = mFname.getText().toString().trim();
+                String lname = mLname.getText().toString().trim();
+                String email = mEmail.getText().toString().trim();
+                String phoneNo = mNumber.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
+
+
+                UserHelperClass helperClass = new UserHelperClass(fname,lname,email,phoneNo,password);
+                mReference.child(email).setValue(helperClass);*/
                 registerUser();
-
-
-
-
-
             }
         });
 
@@ -234,4 +242,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 }
