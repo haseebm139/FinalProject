@@ -53,14 +53,6 @@ public class loginActivity extends AppCompatActivity{
 
         mAuth = FirebaseAuth.getInstance();
 
-      /*  forgetTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(loginActivity.this,ForgetPassActivity.class);
-                startActivity(it);
-            }
-        });*/
-
         regTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
