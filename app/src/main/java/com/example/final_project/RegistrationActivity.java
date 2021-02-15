@@ -100,10 +100,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
     }
 
-    /*public void submit_btn(View view) {
-        Intent it = new Intent(RegistrationActivity.this,loginActivity.class);
-        startActivity(it);
-    }*/
     private void registerUser(){
         final String email = mEmail.getText().toString().trim();
         final String password = mPassword.getText().toString().trim();
@@ -168,8 +164,6 @@ public class RegistrationActivity extends AppCompatActivity {
             mEmail.requestFocus();
             return;
         }
-
-
 
         mPbar.setVisibility(View.VISIBLE);
 
