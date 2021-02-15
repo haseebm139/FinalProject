@@ -2,12 +2,12 @@ package com.example.final_project;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,11 +32,12 @@ public class User_Dashboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private TextView textName, nav_name, nav_email, nav_number, fname, lname, mFname;
-    private FirebaseDatabase database;
-    private DatabaseReference userRef;
-    private static final String USERS = "Users";
-    private String email;
+    private ImageView mProfilePic ;
+    private TextView mName, mEmail, mNumber, mProfileName;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
 
 
 
@@ -44,43 +45,19 @@ public class User_Dashboard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__dashboard);
-        //receive data from login screen
-            Intent intent = getIntent();
-            email = intent.getStringExtra(email);
-
-        DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
-        DatabaseReference userRef = rootRef.child(USERS);
-
-        Log.v("EMAILADD", userRef.orderByChild("email").equalTo(email).toString());
 
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigation);
         drawer = findViewById(R.id.drawer);
-        textName = findViewById(R.id.textName);
-        nav_name = findViewById(R.id.nav_name);
-        nav_email = findViewById(R.id.nav_email);
-        nav_number = findViewById(R.id.nav_number);
-        fname = findViewById(R.id.fname);
-        lname = findViewById(R.id.lname);
+        mProfilePic = findViewById(R.id.nav_profilePic);
+        mName = findViewById(R.id.nav_name);
+        mEmail = findViewById(R.id.nav_email);
+        mNumber = findViewById(R.id.nav_number);
+        mProfileName = findViewById(R.id.proName);
 
-        database = FirebaseDatabase.getInstance();
-        userRef = database.getReference(USERS);
-
-        userRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot ds : snapshot.getChildren()){
-                    if(ds.child("email").getValue().equals(email)) {
-                        textName.setText(ds.child("firstName").getValue(String.class));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        mAuth = FirebaseAuth.getInstance();
+        mDatabase= FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference(mAuth.getUid());
 
 
         setSupportActionBar(toolbar);
@@ -122,6 +99,9 @@ public class User_Dashboard extends AppCompatActivity {
 */
 
 
+
+
+
     }
 
     @Override
@@ -137,9 +117,9 @@ public class User_Dashboard extends AppCompatActivity {
             case R.id.menuLogout:
                 FirebaseAuth.getInstance().signOut();
                 finish();
-                startActivity(new Intent(User_Dashboard.this,loginActivity.class));
-           /* case R.id.changePassword:
-                startActivity(new Intent(this,ForgetPassActivity.class));*/
+                startActivity(new Intent(this,loginActivity.class));
+            case R.id.changePassword:
+                startActivity(new Intent(this,ChangePassword.class));
         }
         return true;
     }
@@ -152,5 +132,7 @@ public class User_Dashboard extends AppCompatActivity {
         else {
             super.onBackPressed();
         }
+
+
     }
 }

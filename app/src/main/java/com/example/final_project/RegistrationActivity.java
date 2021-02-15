@@ -173,17 +173,21 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser rUser = mAuth.getCurrentUser();
-                    assert rUser != null;
+                    String email = rUser.getEmail();
                     String userId = rUser.getUid();
                     mReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("userId",userId);
+                    hashMap.put("email",email);
                     hashMap.put("firstname",fname);
                     hashMap.put("lastname",lname);
                     hashMap.put("phoneNumber",phoneNo);
                     hashMap.put("date_of_birth",date_of_birth);
+                    hashMap.put("password",password);
                     //hashMap.put("age",age);  //for age
                     hashMap.put("imageURL","default");
+                    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+                    mReference.child(userId).setValue(hashMap);
 
                      mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
 

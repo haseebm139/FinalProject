@@ -1,11 +1,12 @@
 package com.example.final_project;
 
 public class UserHelperClass {
-    String fname, lname, email, phoneNo, dOb, pasword;
+    private String fname, lname, email, phoneNo, dOb, pasword ;
 
     public UserHelperClass() {
 
     }
+
 
     public UserHelperClass(String fname, String lname, String email, String phoneNo, String password) {
         this.fname = fname;
