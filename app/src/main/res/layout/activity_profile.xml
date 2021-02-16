@@ -178,6 +178,7 @@
             android:layout_weight="1">
 
         <Button
+            android:id="@+id/cencelbtn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="cencel" />
@@ -189,6 +190,7 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/savebtn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="save" />
