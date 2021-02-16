@@ -2,6 +2,7 @@ package com.example.final_project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +50,7 @@ public class User_Dashboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigation);
         drawerLayout = findViewById(R.id.drawer);
-        dashboardImage = findViewById(R.id.dashboardImage);
+        dashboardImage = findViewById(R.id.dashboardimg);
 
         dashboardImage.setOnClickListener(new View.OnClickListener() {
             @Override

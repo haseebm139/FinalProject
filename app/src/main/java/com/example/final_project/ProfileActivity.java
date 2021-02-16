@@ -38,50 +38,5 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        profileName = findViewById(R.id.profileName);
-        profileEmail = findViewById(R.id.profileEmail);
-        profileNumber = findViewById(R.id.profileNumber);
-        saveProfile = findViewById(R.id.saveProfile);
-
-
-
-        saveProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ValidateAndsave();
-
-            }
-        });
-
-        /*mAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-
-        userID = mAuth.getCurrentUser().getUid();
-
-        DocumentReference dr = fStore.collection("Users").document(userID);
-        dr.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                
-                    profileName.setText(documentSnapshot.getString("firstname"));
-            }
-        });*/
-    }
-
-    private void ValidateAndsave() {
-        if (TextUtils.isEmpty(profileName.getText().toString()))
-        {
-            Toast.makeText(this, "Please Enter Your Name", Toast.LENGTH_SHORT).show();
-        }else if (TextUtils.isEmpty(profileNumber.getText().toString()))
-        {
-            Toast.makeText(this, "Please Enter Your Phone No", Toast.LENGTH_SHORT).show();
-        }else {
-            HashMap<String, Object> userMap = new HashMap<>();
-            userMap.put("firstname", profileName.getText().toString());
-            userMap.put("phNumber", profileNumber.getText().toString());
-
-            dataRef.child(mAuth.getCurrentUser().getUid()).updateChildren(userMap);
-
-        }
     }
 }
