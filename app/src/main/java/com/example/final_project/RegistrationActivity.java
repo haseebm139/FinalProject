@@ -43,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
     private DatabaseReference mReference;
+    private FirebaseDatabase rootNode;
 
 
 
@@ -81,6 +82,18 @@ public class RegistrationActivity extends AppCompatActivity {
         mSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*rootNode = FirebaseDatabase.getInstance();
+                mReference = rootNode.getReference() ;
+                //Get Al the Values
+                String fname = mFname.getText().toString().trim();
+                String lname = mLname.getText().toString().trim();
+                String email = mEmail.getText().toString().trim();
+                String phoneNo = mNumber.getText().toString().trim();
+                String password = mPassword.getText().toString().trim();
+
+
+                UserHelperClass helperClass = new UserHelperClass(fname,lname,email,phoneNo,password);
+                mReference.child(email).setValue(helperClass);*/
                 registerUser();
             }
         });
@@ -160,17 +173,21 @@ public class RegistrationActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
                     FirebaseUser rUser = mAuth.getCurrentUser();
-                    assert rUser != null;
+                    String email = rUser.getEmail();
                     String userId = rUser.getUid();
                     mReference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("userId",userId);
+                    hashMap.put("email",email);
                     hashMap.put("firstname",fname);
                     hashMap.put("lastname",lname);
                     hashMap.put("phoneNumber",phoneNo);
                     hashMap.put("date_of_birth",date_of_birth);
+                    hashMap.put("password",password);
                     //hashMap.put("age",age);  //for age
                     hashMap.put("imageURL","default");
+                    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+                    mReference.child(userId).setValue(hashMap);
 
                      mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -221,4 +238,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
+
+
+
 }

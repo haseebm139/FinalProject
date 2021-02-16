@@ -24,6 +24,11 @@
                 android:title="Contect Us"
                 android:icon="@drawable/ic_contect"/>
 
+            <item
+                android:id="@+id/logout"
+                android:title="Logout"
+                />
+
         </menu>
 
     </item>
