@@ -26,14 +26,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/profileImage"
-        android:layout_width="200dp"
-        android:layout_height="250dp"
+    <com.alexzh.circleimageview.CircleImageView
+        android:id="@+id/proimageView"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:clickable="true"
         android:src="@drawable/profile"
-        android:layout_marginTop="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        tools:ignore="MissingClass" />
+        android:layout_marginTop="15dp"
+        app:view_shadowRadius="4dp"
+        app:view_shadowDx="2dp"
+        app:view_shadowDy="0dp"
+        app:view_borderWidth="4dp"
+        app:view_borderColor="@android:color/darker_gray"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -73,7 +80,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="Email:" />
@@ -81,7 +88,7 @@
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10sp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -98,7 +105,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="Phone:" />
@@ -106,7 +113,7 @@
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10sp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -123,7 +130,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="DOB:" />
@@ -131,7 +138,7 @@
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10sp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -148,7 +155,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="15sp"
             android:textStyle="bold"
             android:text="Bio:" />
@@ -156,7 +163,7 @@
         <EditText
             android:layout_width="350dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10sp"
             android:textSize="20sp"
             android:textStyle="bold"/>
@@ -169,6 +176,7 @@
         android:layout_below="@+id/profileImage"
         android:layout_marginLeft="15sp"
         android:layout_marginRight="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         android:weightSum="2">
 
@@ -181,7 +189,9 @@
             android:id="@+id/cencelbtn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="cencel" />
+            android:layout_marginRight="10dp"
+            android:text="cencel"
+            android:background="@drawable/btn_cmpled_comp"/>
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
@@ -193,7 +203,9 @@
                 android:id="@+id/savebtn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="save" />
+                android:layout_marginLeft="10dp"
+                android:text="save"
+                android:background="@drawable/btn_panding_comp"/>
 
         </androidx.cardview.widget.CardView>
 
