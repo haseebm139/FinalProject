@@ -29,4 +29,5 @@
     <string name="forNewAccount">\"This is not an register Email, you can crate new account \"</string>
     <string name="change_password">Change Password</string>
     <string name="new_password">New Password</string>
+    <string name="Username">Username</string>
 </resources>

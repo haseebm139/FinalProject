@@ -32,15 +32,8 @@
         android:layout_height="192dp"
         android:clickable="true"
         android:src="@drawable/profile"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="15dp"
-        app:view_shadowRadius="4dp"
-        app:view_shadowDx="2dp"
-        app:view_shadowDy="0dp"
-        app:view_borderWidth="4dp"
-        app:view_borderColor="@android:color/darker_gray"/>
+        android:layout_marginTop="15dp"/>
         </LinearLayout>
     </LinearLayout>
 

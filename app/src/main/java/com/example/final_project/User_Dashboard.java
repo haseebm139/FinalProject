@@ -49,7 +49,7 @@ public class User_Dashboard extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         navigationView = findViewById(R.id.navigation);
         drawerLayout = findViewById(R.id.drawer);
-        dashboardImage = findViewById(R.id.dashboardImage);
+        dashboardImage = findViewById(R.id.dashboardimg);
 
         dashboardImage.setOnClickListener(new View.OnClickListener() {
             @Override
