@@ -123,12 +123,11 @@ public class loginActivity extends AppCompatActivity{
                                 HashMap<String,String> hashMap = new HashMap<>();
                                 hashMap.put("userId",userId);
                                 hashMap.put("email",email);
-                                hashMap.put("firstname","");
-                                hashMap.put("lastname","");
+                                hashMap.put("username","");
                                 hashMap.put("phoneNumber","");
                                 hashMap.put("date_of_birth","");
                                 //hashMap.put("age",age);  //for age
-                                hashMap.put("imageURL","default");
+                                hashMap.put("imageURL","");
                                 FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
                                 DatabaseReference mReference = mDatabase.getReference("Users");
                                 mReference.child(userId).setValue(hashMap);

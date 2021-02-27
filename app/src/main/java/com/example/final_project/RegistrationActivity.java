@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    private EditText mEmail, mPassword, mCpassword, mFname, mLname, mNumber, mDOB ;
+    private EditText mEmail, mPassword, mCpassword, mUsername, mNumber, mDOB ;
     private Button mSubmitbtn;
     private ProgressBar mPbar;
     private TextView mLogintv;
@@ -55,8 +55,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         mEmail = findViewById(R.id.email);
-        mFname = findViewById(R.id.fname);
-        mLname = findViewById(R.id.lname);
+        mUsername = findViewById(R.id.username);
         mNumber = findViewById(R.id.phNo);
         mDOB = findViewById(R.id.dob);
         mPassword = findViewById(R.id.password);
@@ -104,8 +103,8 @@ public class RegistrationActivity extends AppCompatActivity {
         final String email = mEmail.getText().toString().trim();
         final String password = mPassword.getText().toString().trim();
         final String cpassword = mCpassword.getText().toString().trim();
-        final String lname = mLname.getText().toString().trim();
-        final String fname = mFname.getText().toString().trim();
+
+        final String username = mUsername.getText().toString().trim();
         final String phoneNo = mNumber.getText().toString().trim();
         final String date_of_birth = mDOB.getText().toString().trim();
 
@@ -119,14 +118,9 @@ public class RegistrationActivity extends AppCompatActivity {
         }
 
 
-        if (TextUtils.isEmpty(fname)){
-            mFname.setError("Required");
-            mFname.requestFocus();
-            return;
-        }
-        if (TextUtils.isEmpty(lname)){
-            mLname.setError("Required");
-            mLname.requestFocus();
+        if (TextUtils.isEmpty(username)){
+            mUsername.setError("Username is Required");
+            mUsername.requestFocus();
             return;
         }
         if (TextUtils.isEmpty(cpassword)){
@@ -179,13 +173,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     HashMap<String,String> hashMap = new HashMap<>();
                     hashMap.put("userId",userId);
                     hashMap.put("email",email);
-                    hashMap.put("firstname",fname);
-                    hashMap.put("lastname",lname);
+                    hashMap.put("username",username);
                     hashMap.put("phoneNumber",phoneNo);
                     hashMap.put("date_of_birth",date_of_birth);
                     hashMap.put("password",password);
                     //hashMap.put("age",age);  //for age
-                    hashMap.put("imageURL","default");
+                    hashMap.put("imageURL","");
                     FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
                     mReference.child(userId).setValue(hashMap);
 

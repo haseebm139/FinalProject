@@ -1,36 +1,24 @@
 package com.example.final_project;
 
 public class UserHelperClass {
-    private String fname, lname, email, phoneNo, dOb, pasword ;
+    private String username, email, phoneNo;
 
-    public UserHelperClass() {
-
+    public UserHelperClass(String username) {
+        this.username = username;
     }
 
-
-    public UserHelperClass(String fname, String lname, String email, String phoneNo, String password) {
-        this.fname = fname;
-        this.lname = lname;
+    public UserHelperClass(String username, String email, String phoneNo) {
+        this.username = username;
         this.email = email;
         this.phoneNo = phoneNo;
-        this.dOb = dOb;
-        this.pasword = pasword;
     }
 
-    public String getFname() {
-        return fname;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFname(String fname) {
-        this.fname = fname;
-    }
-
-    public String getLname() {
-        return lname;
-    }
-
-    public void setLname(String lname) {
-        this.lname = lname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -47,21 +35,5 @@ public class UserHelperClass {
 
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
-    }
-
-    public String getdOb() {
-        return dOb;
-    }
-
-    public void setdOb(String dOb) {
-        this.dOb = dOb;
-    }
-
-    public String getPasword() {
-        return pasword;
-    }
-
-    public void setPasword(String pasword) {
-        this.pasword = pasword;
     }
 }
