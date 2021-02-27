@@ -94,11 +94,5 @@ public class ChangePassword extends AppCompatActivity {
         });
 
     }
-    /*private void changePassword(String mOPassword, final String mNPassword) {
-        mPBar.setVisibility(View.VISIBLE);
-        AuthCredential credential = EmailAuthProvider.getCredential(mUser.getEmail(),mOPassword);
-
-    }*/
-
 
 }

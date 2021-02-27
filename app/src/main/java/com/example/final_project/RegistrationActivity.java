@@ -70,29 +70,9 @@ public class RegistrationActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
 
-
-        // if User Already log in
-        if(mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(),User_Dashboard.class));
-            finish();
-        }
-
-
         mSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*rootNode = FirebaseDatabase.getInstance();
-                mReference = rootNode.getReference() ;
-                //Get Al the Values
-                String fname = mFname.getText().toString().trim();
-                String lname = mLname.getText().toString().trim();
-                String email = mEmail.getText().toString().trim();
-                String phoneNo = mNumber.getText().toString().trim();
-                String password = mPassword.getText().toString().trim();
-
-
-                UserHelperClass helperClass = new UserHelperClass(fname,lname,email,phoneNo,password);
-                mReference.child(email).setValue(helperClass);*/
                 registerUser();
             }
         });
@@ -200,29 +180,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-                    /*User user = new User(userFName, userLName , userEmail , userPhNumber, userAge);
-                    FirebaseDatabase.getInstance().getReference(user)
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if(task.isSuccessful()){
-                                Toast.makeText(RegistrationActivity.this,"User Created",Toast.LENGTH_SHORT).show();
-                                mPbar.setVisibility(View.VISIBLE);
-                            }
-                            else {
-                                Toast.makeText(RegistrationActivity.this,"Error !" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                                mPbar.setVisibility(View.GONE);
-                            }
-                        }
-                    });
-                    //startActivity(new Intent(getApplicationContext(),loginActivity.class));
-                } else {
-                    Toast.makeText(RegistrationActivity.this,"Error !" + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                    mPbar.setVisibility(View.GONE);
-                }*/
-
-            }else {
+                }else {
                     mPbar.setVisibility(View.GONE);
                     Toast.makeText(RegistrationActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();
 

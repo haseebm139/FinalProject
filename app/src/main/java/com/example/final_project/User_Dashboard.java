@@ -22,6 +22,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,11 +49,15 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
     private ImageView dashboardImage;
     private TextView profileUsername;
 
-    private DatabaseReference dataRef;
+    /*private DatabaseReference dataRef;
     private FirebaseFirestore fStore;
     private FirebaseDatabase firebaseDatabase;
     private FirebaseUser fUser;
     private FirebaseAuth mAuth;
+    private String userID;
+*/
+    private FirebaseUser user;
+    private DatabaseReference reference;
     private String userID;
 
 
@@ -59,9 +66,15 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__dashboard);
 
+        profileUsername = findViewById(R.id.proName);
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         navigationView = findViewById(R.id.navigation);
+        navigationView.bringToFront();
+        //navigationView.setNavigationItemSelectedListener(this);
+
         drawerLayout = findViewById(R.id.drawer);
 
         if(savedInstanceState == null) {
@@ -69,48 +82,39 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
                     new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
         }
+
         dashboardImage = findViewById(R.id.dashboardimg);
 
         //init firebase
-
-        mAuth = FirebaseAuth.getInstance();
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        fUser = mAuth.getCurrentUser();
-        dataRef = firebaseDatabase.getReference(mAuth.getUid());
-
-        userID = mAuth.getCurrentUser().getUid();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
 
         profileUsername = findViewById(R.id.proName);
 
-        /*dataRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                UserHelperClass userProfile = snapshot.getValue(UserHelperClass.class);
-                profileUsername.setText(userProfile.getUsername());
 
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(User_Dashboard.this,error.getCode(),Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
-
-
-
-
-        dashboardImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(User_Dashboard.this, ProfileActivity.class);
-                startActivity(it);
-            }
-        });
         setSupportActionBar(toolbar);
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserHelperClass userProfile = snapshot.getValue(UserHelperClass.class);
+                if(userProfile != null){
+                    String userName = userProfile.username.toUpperCase();
+
+                    profileUsername.setText(userName);
+                    }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
 
        /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -153,6 +157,9 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(User_Dashboard.this,loginActivity.class));
+            case R.id.profile:
+                startActivity(new Intent(User_Dashboard.this,ProfileActivity.class));
+
         }
         return true;
     }
@@ -168,12 +175,18 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
     }
 
 
-    @Override
+   @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        Fragment fragment = null;
+        int id = item.getItemId();
+        //item.setChecked(true);
+        drawerLayout.closeDrawers();
+        switch (id){
             case R.id.nav_profile:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfileFragment()).commit();
+                ProfileFragment profileFragment = new ProfileFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
+                Toast.makeText(User_Dashboard.this, "Profile", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.nav_login:
