@@ -19,13 +19,15 @@ import org.w3c.dom.Text;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private TextView mUser , mEmail, mPhone;
+
+
+    private TextView mUser , mEmail, mPhone, mBirthday ;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
@@ -37,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         mUser = findViewById(R.id.tvname);
         mEmail = findViewById(R.id.tvemail);
         mPhone = findViewById(R.id.tvphone);
+        mBirthday = findViewById(R.id.edtDOB);
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -46,10 +49,12 @@ public class ProfileActivity extends AppCompatActivity {
                     String userName = userProfile.username;
                     String userEmail = userProfile.email;
                     String userPhone = userProfile.phoneNumber;
+                    String userBirthday = userProfile.birthday;
 
                     mUser.setText(userName);
                     mEmail.setText(userEmail);
                     mPhone.setText(userPhone);
+                    mBirthday.setText(userBirthday);
                 }
 
             }

@@ -32,5 +32,26 @@
     <string name="Username">UserName</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="become_a_service_provider">Become a Service Provider</string>
+    <string name="become_a_customer">Become a Customer</string>
+    <string name="electrician">Electrician</string>
+    <string name="ac_mechanic">AC_Mechanic</string>
+    <string name="carpenter">Carpenter</string>
+    <string name="plumber">Plumber</string>
+    <string name="car_mechanic">Car_Mechanic</string>
+    <string name="com_repair">Com_Repair</string>
+    <string name="mob_repair">Mob_Repair</string>
 
+
+    <array name="skills">
+        <item>@string/electrician</item>
+        <item>@string/ac_mechanic</item>
+        <item>@string/carpenter</item>
+        <item>@string/plumber</item>
+        <item>Mob_Repair</item>
+        <item>Computer Repair</item>
+        <item>Car Mechanic</item>
+
+
+    </array>
 </resources>
