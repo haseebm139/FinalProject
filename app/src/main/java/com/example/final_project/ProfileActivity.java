@@ -49,15 +49,23 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     private ImageView profileImageView;
-    private TextView uploadProbtn;
+    private TextView uploadProbtn, mUser, mEmail, mPhone;
     private StorageReference storageReference;
     private static final int GALLERY_REQUEST = 1000;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
+    private DatabaseReference reference;
+    private String userID;
+    private FirebaseUser user;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        reference = FirebaseDatabase.getInstance().getReference("Users");
+        userID = user.getUid();
 
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
@@ -71,6 +79,32 @@ public class ProfileActivity extends AppCompatActivity {
 
         profileImageView = (ImageView) findViewById(R.id.proimageView);
         uploadProbtn = (TextView) findViewById(R.id.uploadpro);
+
+        mUser = findViewById(R.id.tvname);
+        mEmail = findViewById(R.id.tvemail);
+        mPhone = findViewById(R.id.tvphone);
+
+        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserHelperClass userProfile = snapshot.getValue(UserHelperClass.class);
+                if(userProfile != null){
+                    String userName = userProfile.username;
+                    String userEmail = userProfile.email;
+                    String userPhone = userProfile.phoneNumber;
+
+                    mUser.setText(userName);
+                    mEmail.setText(userEmail);
+                    mPhone.setText(userPhone);
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         uploadProbtn.setOnClickListener(new View.OnClickListener() {
             @Override
