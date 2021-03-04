@@ -1,7 +1,9 @@
 package com.example.final_project;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -40,33 +42,27 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class User_Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class User_Dashboard extends AppCompatActivity {
+
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
     private ImageView dashboardImage;
-    private TextView profileUsername;
-
-    /*private DatabaseReference dataRef;
-    private FirebaseFirestore fStore;
-    private FirebaseDatabase firebaseDatabase;
-    private FirebaseUser fUser;
-    private FirebaseAuth mAuth;
-    private String userID;
-*/
+    private TextView profileUsername, navName, navEmail;
     private FirebaseUser user;
     private DatabaseReference reference;
     private String userID;
+    String profileUserName, profileEmail;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__dashboard);
+        ProfileActivity profileActivity = new ProfileActivity();
 
-        profileUsername = findViewById(R.id.proName);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -77,7 +73,7 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
 
         drawerLayout = findViewById(R.id.drawer);
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                     new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
@@ -91,24 +87,34 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
         userID = user.getUid();
 
         profileUsername = findViewById(R.id.proName);
+        navName = findViewById(R.id.nav_name);
+        navEmail = findViewById(R.id.nav_email);
 
 
         setSupportActionBar(toolbar);
-        toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, new ProfileFragment())
+                    .commit();
+            navigationView.setCheckedItem(R.id.nav_profile);
+        }
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 UserHelperClass userProfile = snapshot.getValue(UserHelperClass.class);
-                if(userProfile != null){
+                if (userProfile != null) {
                     String userName = userProfile.username.toUpperCase();
 
                     profileUsername.setText(userName);
-                    }
+
+                }
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -117,7 +123,9 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
         });
 
 
-       /*navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+
+
+       navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -125,6 +133,7 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
                     case R.id.nav_profile:
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                                 new ProfileFragment()).commit();
+                        Toast.makeText(User_Dashboard.this, "Profile", Toast.LENGTH_SHORT).show();
                         break;
 
                     case R.id.nav_login:
@@ -140,8 +149,9 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return true;
             }
-        });*/
+        });
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -156,9 +166,9 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
             case R.id.menuLogout:
                 FirebaseAuth.getInstance().signOut();
                 finish();
-                startActivity(new Intent(User_Dashboard.this,loginActivity.class));
+                startActivity(new Intent(User_Dashboard.this, loginActivity.class));
             case R.id.profile:
-                startActivity(new Intent(User_Dashboard.this,ProfileActivity.class));
+                startActivity(new Intent(User_Dashboard.this, ProfileActivity.class));
 
         }
         return true;
@@ -168,38 +178,10 @@ public class User_Dashboard extends AppCompatActivity implements NavigationView.
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else {
+        } else {
             super.onBackPressed();
         }
-    }
 
 
-   @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
-        int id = item.getItemId();
-        //item.setChecked(true);
-        drawerLayout.closeDrawers();
-        switch (id){
-            case R.id.nav_profile:
-                ProfileFragment profileFragment = new ProfileFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragment_container,profileFragment).commit();
-                Toast.makeText(User_Dashboard.this, "Profile", Toast.LENGTH_SHORT).show();
-                break;
-
-            case R.id.nav_login:
-                Toast.makeText(this, "Login", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_logout:
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(User_Dashboard.this,loginActivity.class));
-                break;
-
-        }
-        drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

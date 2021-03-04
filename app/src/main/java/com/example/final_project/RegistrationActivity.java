@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
@@ -26,8 +28,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
+import java.util.AbstractList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -35,23 +41,23 @@ import java.util.regex.Pattern;
 public class RegistrationActivity extends AppCompatActivity {
 
     private EditText mEmail, mPassword, mCpassword, mUsername, mNumber, mDOB ;
-    private Button mSubmitbtn;
+    private Button mSubmitbtn, mCustomerBtn, mProviderBtn;
     private ProgressBar mPbar;
     private TextView mLogintv;
     private RadioGroup mRadioGro;
     private RadioButton mRadioBtn;
     private Toolbar toolbar;
-    private FirebaseAuth mAuth;
+    FirebaseAuth mAuth;
     private DatabaseReference mReference;
-    private FirebaseDatabase rootNode;
-
+    private DatePickerDialog datePickerDialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration);
-        toolbar = findViewById(R.id.toolbar);
+        //setContentView(R.layout.activity_registration);
+        //toolbar = findViewById(R.id.toolbar);
+
 
 
         mEmail = findViewById(R.id.email);
@@ -63,7 +69,8 @@ public class RegistrationActivity extends AppCompatActivity {
         mLogintv = findViewById(R.id.loginTv);
         mSubmitbtn = findViewById(R.id.btnSub);
         mRadioGro = findViewById(R.id.radioGro);
-
+        mCustomerBtn = findViewById(R.id.customerBtn);
+        mProviderBtn = findViewById(R.id.providerBtn);
 
         mPbar = findViewById(R.id.proBar);
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +81,30 @@ public class RegistrationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 registerUser();
+            }
+        });
+
+        mProviderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(RegistrationActivity.this,loginActivity.class);
+            }
+        });
+        mDOB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                final int year = calendar.get(Calendar.YEAR);
+                final int month = calendar.get(Calendar.MONTH);
+                final int day = calendar.get(Calendar.DAY_OF_MONTH);
+                datePickerDialog = new DatePickerDialog(RegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        mDOB.setText(day+"-"+(month+1)+"-"+year);
+
+                    }
+                },year,month,day);
+                datePickerDialog.show();
             }
         });
 
@@ -134,8 +165,8 @@ public class RegistrationActivity extends AppCompatActivity {
             return;
         }
         if (TextUtils.isEmpty(date_of_birth)){
-            mEmail.setError("Date of Birth is Required");
-            mEmail.requestFocus();
+            mDOB.setError("Date of Birth is Required");
+            //mDOB.requestFocus();
             return;
         }
 
