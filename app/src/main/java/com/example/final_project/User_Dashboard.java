@@ -136,9 +136,28 @@ public class User_Dashboard extends AppCompatActivity {
                         Toast.makeText(User_Dashboard.this, "Profile", Toast.LENGTH_SHORT).show();
                         break;
 
-                    case R.id.nav_login:
-                        Toast.makeText(User_Dashboard.this, "Login", Toast.LENGTH_SHORT).show();
+                    case R.id.nav_Navigation:
+                        Toast.makeText(User_Dashboard.this, "Naviagion", Toast.LENGTH_SHORT).show();
                         break;
+                    case R.id.nav_message:
+                        Toast.makeText(User_Dashboard.this, "Message", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.nav_setting:
+                        Toast.makeText(User_Dashboard.this, "Setting", Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.nav_contectUS:
+                        Toast.makeText(User_Dashboard.this, "ContectUs", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.nav_invite:
+                        Toast.makeText(User_Dashboard.this, "Invite Friends", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case R.id.nav_feedback:
+                        Toast.makeText(User_Dashboard.this, "FeedBack", Toast.LENGTH_SHORT).show();
+                        break;
+
                     case R.id.nav_logout:
                         FirebaseAuth.getInstance().signOut();
                         finish();

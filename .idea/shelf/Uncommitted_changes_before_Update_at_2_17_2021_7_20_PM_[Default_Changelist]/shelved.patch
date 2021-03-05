@@ -1,0 +1,289 @@
+Index: app/src/main/java/com/example/final_project/SplashActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.final_project;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\n\r\npublic class SplashActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_splash);\r\n\r\n        //Usage of Splash\r\n        new Handler().postDelayed(new Runnable() {\r\n            @Override\r\n            public void run() {\r\n                Intent intent = new Intent(SplashActivity.this, loginActivity.class);\r\n                startActivity(intent);\r\n                finish();\r\n            }\r\n        }, 3000);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/final_project/SplashActivity.java	(revision 4ba980529804595fab63014bac525f83741b7f3e)
++++ app/src/main/java/com/example/final_project/SplashActivity.java	(date 1613566881674)
+@@ -6,6 +6,10 @@
+ import android.os.Bundle;
+ import android.os.Handler;
+ 
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
++import com.google.firebase.database.DatabaseReference;
++
+ public class SplashActivity extends AppCompatActivity {
+ 
+     @Override
+@@ -13,6 +17,7 @@
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_splash);
+ 
++
+         //Usage of Splash
+         new Handler().postDelayed(new Runnable() {
+             @Override
+Index: app/src/main/res/layout/activity_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    tools:context=\".ProfileActivity\"\r\n    android:orientation=\"vertical\">\r\n\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"250dp\"\r\n        android:orientation=\"vertical\"\r\n        android:background=\"@drawable/btn_active_red\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\">\r\n\r\n    <com.alexzh.circleimageview.CircleImageView\r\n        android:id=\"@+id/proimageView\"\r\n        android:layout_width=\"192dp\"\r\n        android:layout_height=\"192dp\"\r\n        android:clickable=\"true\"\r\n        android:src=\"@drawable/profile\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_centerHorizontal=\"true\"\r\n        android:layout_gravity=\"center_horizontal\"\r\n        android:layout_marginTop=\"15dp\"\r\n        app:view_shadowRadius=\"4dp\"\r\n        app:view_shadowDx=\"2dp\"\r\n        app:view_shadowDy=\"0dp\"\r\n        app:view_borderWidth=\"4dp\"\r\n        app:view_borderColor=\"@android:color/darker_gray\"/>\r\n        </LinearLayout>\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:id=\"@+id/firstl\"\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\">\r\n\r\n        <TextView\r\n            android:id=\"@+id/firstname\"\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            android:text=\"Full Name:\" />\r\n\r\n        <EditText\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"20dp\"\r\n            android:layout_marginLeft=\"10sp\"\r\n            android:textSize=\"20sp\"\r\n            android:textStyle=\"bold\"/>\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\">\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            android:text=\"Email:\" />\r\n\r\n        <EditText\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10sp\"\r\n            android:textSize=\"20sp\"\r\n            android:textStyle=\"bold\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\">\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            android:text=\"Phone:\" />\r\n\r\n        <EditText\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10sp\"\r\n            android:textSize=\"20sp\"\r\n            android:textStyle=\"bold\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\">\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            android:text=\"DOB:\" />\r\n\r\n        <EditText\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10sp\"\r\n            android:textSize=\"20sp\"\r\n            android:textStyle=\"bold\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\">\r\n\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:textSize=\"15sp\"\r\n            android:textStyle=\"bold\"\r\n            android:text=\"Bio:\" />\r\n\r\n        <EditText\r\n            android:layout_width=\"350dp\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:layout_marginLeft=\"10sp\"\r\n            android:textSize=\"20sp\"\r\n            android:textStyle=\"bold\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"fill_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/profileImage\"\r\n        android:layout_marginLeft=\"15sp\"\r\n        android:layout_marginRight=\"15dp\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:orientation=\"horizontal\"\r\n        android:weightSum=\"2\">\r\n\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\">\r\n\r\n        <Button\r\n            android:id=\"@+id/cencelbtn\"\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginRight=\"10dp\"\r\n            android:text=\"cencel\"\r\n            android:background=\"@drawable/btn_cmpled_comp\"/>\r\n\r\n        </androidx.cardview.widget.CardView>\r\n        <androidx.cardview.widget.CardView\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_weight=\"1\">\r\n\r\n            <Button\r\n                android:id=\"@+id/savebtn\"\r\n                android:layout_width=\"fill_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:text=\"save\"\r\n                android:background=\"@drawable/btn_panding_comp\"/>\r\n\r\n        </androidx.cardview.widget.CardView>\r\n\r\n    </LinearLayout>\r\n\r\n</LinearLayout>\r\n</ScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_profile.xml	(revision 4ba980529804595fab63014bac525f83741b7f3e)
++++ app/src/main/res/layout/activity_profile.xml	(date 1613567185384)
+@@ -1,215 +1,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-
+-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent">
+-
+-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    xmlns:tools="http://schemas.android.com/tools"
+-    android:layout_width="match_parent"
+-    android:layout_height="match_parent"
+-    tools:context=".ProfileActivity"
+-    android:orientation="vertical">
+-
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="250dp"
+-        android:orientation="vertical"
+-        android:background="@drawable/btn_active_red">
+-
+-        <LinearLayout
+-            android:layout_width="fill_parent"
+-            android:layout_height="wrap_content"
+-            android:orientation="vertical">
+-
+-    <com.alexzh.circleimageview.CircleImageView
+-        android:id="@+id/proimageView"
+-        android:layout_width="192dp"
+-        android:layout_height="192dp"
+-        android:clickable="true"
+-        android:src="@drawable/profile"
+-        android:layout_alignParentTop="true"
+-        android:layout_centerHorizontal="true"
+-        android:layout_gravity="center_horizontal"
+-        android:layout_marginTop="15dp"
+-        app:view_shadowRadius="4dp"
+-        app:view_shadowDx="2dp"
+-        app:view_shadowDy="0dp"
+-        app:view_borderWidth="4dp"
+-        app:view_borderColor="@android:color/darker_gray"/>
+-        </LinearLayout>
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:id="@+id/firstl"
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp">
+-
+-        <TextView
+-            android:id="@+id/firstname"
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="20dp"
+-            android:textSize="15sp"
+-            android:textStyle="bold"
+-            android:text="Full Name:" />
+-
+-        <EditText
+-            android:layout_width="350dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="20dp"
+-            android:layout_marginLeft="10sp"
+-            android:textSize="20sp"
+-            android:textStyle="bold"/>
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp">
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:textSize="15sp"
+-            android:textStyle="bold"
+-            android:text="Email:" />
+-
+-        <EditText
+-            android:layout_width="350dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginLeft="10sp"
+-            android:textSize="20sp"
+-            android:textStyle="bold"/>
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp">
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:textSize="15sp"
+-            android:textStyle="bold"
+-            android:text="Phone:" />
+-
+-        <EditText
+-            android:layout_width="350dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginLeft="10sp"
+-            android:textSize="20sp"
+-            android:textStyle="bold"/>
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp">
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:textSize="15sp"
+-            android:textStyle="bold"
+-            android:text="DOB:" />
+-
+-        <EditText
+-            android:layout_width="350dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginLeft="10sp"
+-            android:textSize="20sp"
+-            android:textStyle="bold"/>
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp">
+-
+-        <TextView
+-            android:layout_width="wrap_content"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:textSize="15sp"
+-            android:textStyle="bold"
+-            android:text="Bio:" />
+-
+-        <EditText
+-            android:layout_width="350dp"
+-            android:layout_height="wrap_content"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginLeft="10sp"
+-            android:textSize="20sp"
+-            android:textStyle="bold"/>
+-
+-    </LinearLayout>
+-
+-    <LinearLayout
+-        android:layout_width="fill_parent"
+-        android:layout_height="wrap_content"
+-        android:layout_below="@+id/profileImage"
+-        android:layout_marginLeft="15sp"
+-        android:layout_marginRight="15dp"
+-        android:layout_marginTop="10dp"
+-        android:orientation="horizontal"
+-        android:weightSum="2">
+-
+-        <androidx.cardview.widget.CardView
+-            android:layout_width="fill_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_weight="1">
+-
+-        <Button
+-            android:id="@+id/cencelbtn"
+-            android:layout_width="fill_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_marginRight="10dp"
+-            android:text="cencel"
+-            android:background="@drawable/btn_cmpled_comp"/>
+-
+-        </androidx.cardview.widget.CardView>
+-        <androidx.cardview.widget.CardView
+-            android:layout_width="fill_parent"
+-            android:layout_height="wrap_content"
+-            android:layout_weight="1">
+-
+-            <Button
+-                android:id="@+id/savebtn"
+-                android:layout_width="fill_parent"
+-                android:layout_height="wrap_content"
+-                android:layout_marginLeft="10dp"
+-                android:text="save"
+-                android:background="@drawable/btn_panding_comp"/>
+-
+-        </androidx.cardview.widget.CardView>
+-
+-    </LinearLayout>
+-
+-</LinearLayout>
+-</ScrollView>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_13_PREVIEW\" default=\"false\" project-jdk-name=\"1.8\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/build/classes\" />\r\n  </component>\r\n  <component name=\"ProjectType\">\r\n    <option name=\"id\" value=\"Android\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(revision 4ba980529804595fab63014bac525f83741b7f3e)
++++ .idea/misc.xml	(date 1613571620320)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+-  <component name="ProjectRootManager" version="2" languageLevel="JDK_13_PREVIEW" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
++  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/build/classes" />
+   </component>
+   <component name="ProjectType">
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <bytecodeTargetLevel target=\"13\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/compiler.xml	(revision 4ba980529804595fab63014bac525f83741b7f3e)
++++ .idea/compiler.xml	(date 1613571620678)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="CompilerConfiguration">
+-    <bytecodeTargetLevel target="13" />
++    <bytecodeTargetLevel target="1.8" />
+   </component>
+ </project>
+\ No newline at end of file

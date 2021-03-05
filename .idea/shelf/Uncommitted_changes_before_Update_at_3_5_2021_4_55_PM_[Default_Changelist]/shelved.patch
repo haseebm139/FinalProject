@@ -1,0 +1,164 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.2\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.finalproject\"\r\n        minSdkVersion 21\r\n        targetSdkVersion 30\r\n        multiDexEnabled true\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation 'com.alexzh:circleimageview:1.2.0'\r\n    implementation 'androidx.legacy:legacy-support-v4:1.0.0'\r\n    compileOnly 'androidx.annotation:annotation:1.1.0'\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.2'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    implementation 'com.google.firebase:firebase-config:20.0.3'\r\n    implementation 'com.google.firebase:firebase-firestore:22.1.0'\r\n    implementation 'com.google.android.gms:play-services-auth:19.0.0'\r\n    testImplementation 'junit:junit:4.13'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n    implementation 'androidx.appcompat:appcompat:1.3.0-beta01'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.android.support:multidex:1.0.3'\r\n    implementation 'com.squareup.picasso:picasso:2.71828'\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 5562067c5fce0a9031baad269a894c58d568f9f1)
++++ app/build.gradle	(date 1614944565775)
+@@ -3,7 +3,7 @@
+ 
+ android {
+     compileSdkVersion 30
+-    buildToolsVersion "30.0.2"
++    buildToolsVersion "30.0.3"
+ 
+     defaultConfig {
+         applicationId "com.example.finalproject"
+@@ -36,13 +36,16 @@
+     implementation 'com.google.firebase:firebase-config:20.0.3'
+     implementation 'com.google.firebase:firebase-firestore:22.1.0'
+     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+-    testImplementation 'junit:junit:4.13'
++    testImplementation 'junit:junit:4.13.2'
+     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+     implementation 'androidx.appcompat:appcompat:1.3.0-beta01'
+     implementation 'com.google.android.material:material:1.3.0'
+     implementation 'com.android.support:multidex:1.0.3'
+     implementation 'com.squareup.picasso:picasso:2.71828'
++    implementation 'com.mikhaellopez:circularimageview:4.2.0'
++
++
+ 
+ 
+ }
+Index: app/src/main/java/com/example/final_project/ProfileActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.final_project;\r\n\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport android.os.Bundle;\r\nimport android.widget.TextView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DataSnapshot;\r\nimport com.google.firebase.database.DatabaseError;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\nimport com.google.firebase.database.ValueEventListener;\r\nimport com.google.firebase.firestore.auth.User;\r\nimport org.w3c.dom.Text;\r\n\r\npublic class ProfileActivity extends AppCompatActivity {\r\n\r\n\r\n\r\n    private TextView mUser , mEmail, mPhone, mBirthday ;\r\n    private FirebaseUser user;\r\n    private DatabaseReference reference;\r\n    private String userID;\r\n\r\n    @Override\r\n    public void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_profile);\r\n\r\n        user = FirebaseAuth.getInstance().getCurrentUser();\r\n        reference = FirebaseDatabase.getInstance().getReference(\"Users\");\r\n        userID = user.getUid();\r\n\r\n\r\n        mUser = findViewById(R.id.tvname);\r\n        mEmail = findViewById(R.id.tvemail);\r\n        mPhone = findViewById(R.id.tvphone);\r\n        mBirthday = findViewById(R.id.edtDOB);\r\n\r\n        reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {\r\n            @Override\r\n            public void onDataChange(@NonNull DataSnapshot snapshot) {\r\n                UserHelperClass userProfile = snapshot.getValue(UserHelperClass.class);\r\n                if(userProfile != null){\r\n                    String userName = userProfile.username;\r\n                    String userEmail = userProfile.email;\r\n                    String userPhone = userProfile.phoneNumber;\r\n                    String userBirthday = userProfile.birthday;\r\n\r\n                    mUser.setText(userName);\r\n                    mEmail.setText(userEmail);\r\n                    mPhone.setText(userPhone);\r\n                    mBirthday.setText(userBirthday);\r\n                }\r\n\r\n            }\r\n            @Override\r\n            public void onCancelled(@NonNull DatabaseError error) {\r\n\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/final_project/ProfileActivity.java	(revision 5562067c5fce0a9031baad269a894c58d568f9f1)
++++ app/src/main/java/com/example/final_project/ProfileActivity.java	(date 1614945343856)
+@@ -2,8 +2,11 @@
+ 
+ 
+ import androidx.annotation.NonNull;
++import androidx.appcompat.app.ActionBar;
+ import androidx.appcompat.app.AppCompatActivity;
+ 
++import android.graphics.Color;
++import android.graphics.drawable.ColorDrawable;
+ import android.os.Bundle;
+ import android.widget.TextView;
+ 
+Index: app/src/main/java/com/example/final_project/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.final_project;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.drawerlayout.widget.DrawerLayout;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.os.Handler;\r\nimport android.view.MenuItem;\r\nimport android.view.View;\r\n\r\nimport com.google.android.material.navigation.NavigationView;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.squareup.okhttp.internal.framed.FrameReader;\r\n\r\nimport java.time.Instant;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n\r\n        // if the user is new\r\n        if (FirebaseAuth.getInstance().getCurrentUser() == null) {\r\n            startActivity(new Intent(getApplicationContext(),loginActivity.class));\r\n            finish();\r\n        }\r\n    }\r\n\r\n    public void reg_btn(View view) {\r\n        Intent it = new Intent(MainActivity.this,loginActivity.class);\r\n        startActivity(it);\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/final_project/MainActivity.java	(revision 5562067c5fce0a9031baad269a894c58d568f9f1)
++++ app/src/main/java/com/example/final_project/MainActivity.java	(date 1614944999973)
+@@ -25,7 +25,7 @@
+ 
+         // if the user is new
+         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+-            startActivity(new Intent(getApplicationContext(),loginActivity.class));
++            startActivity(new Intent(getApplicationContext(),User_Dashboard.class));
+             finish();
+         }
+     }
+Index: app/src/main/res/layout/activity_profile.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n\r\n<ScrollView xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\">\r\n\r\n    <LinearLayout\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        tools:context=\".ProfileActivity\"\r\n        android:orientation=\"vertical\">\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"250dp\"\r\n            android:orientation=\"vertical\"\r\n            android:background=\"@drawable/btn_active_red\">\r\n\r\n            <LinearLayout\r\n                android:layout_width=\"fill_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:orientation=\"vertical\">\r\n                <ImageView\r\n                    android:id=\"@+id/proimageView\"\r\n                    android:layout_width=\"192dp\"\r\n                    android:layout_height=\"192dp\"\r\n                    android:clickable=\"true\"\r\n                    android:src=\"@drawable/profile\"\r\n                    android:layout_gravity=\"center_horizontal\"\r\n                    android:layout_marginTop=\"15dp\"\r\n                    android:focusable=\"true\">\r\n\r\n                </ImageView>\r\n            </LinearLayout>\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:paddingLeft=\"15sp\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:textSize=\"15sp\"\r\n                android:textStyle=\"bold\"\r\n                android:text=\"@string/Username\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvname\"\r\n                android:layout_width=\"350dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"20dp\"\r\n                android:layout_marginStart=\"10sp\"\r\n                android:textSize=\"20sp\"\r\n                android:textStyle=\"bold\"/>\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:paddingLeft=\"15sp\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:textSize=\"15sp\"\r\n                android:textStyle=\"bold\"\r\n                android:text=\"Email:\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvemail\"\r\n                android:layout_width=\"350dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginLeft=\"10sp\"\r\n                android:textSize=\"20sp\"\r\n                android:textStyle=\"bold\"/>\r\n\r\n        </LinearLayout>\r\n\r\n        <LinearLayout\r\n\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:paddingLeft=\"15sp\">\r\n\r\n            <TextView\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:textSize=\"15sp\"\r\n                android:textStyle=\"bold\"\r\n                android:text=\"Phone:\" />\r\n\r\n            <TextView\r\n                android:id=\"@+id/tvphone\"\r\n                android:layout_width=\"350dp\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginTop=\"10dp\"\r\n                android:layout_marginStart=\"10sp\"\r\n                android:textSize=\"20sp\"\r\n                android:textStyle=\"bold\"/>\r\n\r\n        </LinearLayout>\r\n\r\n\r\n\r\n\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"fill_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:layout_marginStart=\"15sp\"\r\n            android:layout_marginEnd=\"15dp\"\r\n            android:layout_marginTop=\"10dp\"\r\n            android:orientation=\"horizontal\"\r\n            android:weightSum=\"2\">\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"fill_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/cancelBtn\"\r\n                    android:layout_width=\"fill_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginEnd=\"10dp\"\r\n                    android:text=\"cancel\"\r\n                    android:background=\"@drawable/btn_cmpled_comp\"/>\r\n\r\n            </androidx.cardview.widget.CardView>\r\n            <androidx.cardview.widget.CardView\r\n                android:layout_width=\"fill_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_weight=\"1\">\r\n\r\n                <Button\r\n                    android:id=\"@+id/saveBtn\"\r\n                    android:layout_width=\"fill_parent\"\r\n                    android:layout_height=\"wrap_content\"\r\n                    android:layout_marginStart=\"10dp\"\r\n                    android:text=\"save\"\r\n                    android:background=\"@drawable/btn_panding_comp\"/>\r\n\r\n            </androidx.cardview.widget.CardView>\r\n\r\n        </LinearLayout>\r\n\r\n    </LinearLayout>\r\n</ScrollView>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_profile.xml	(revision 5562067c5fce0a9031baad269a894c58d568f9f1)
++++ app/src/main/res/layout/activity_profile.xml	(date 1614945343842)
+@@ -18,30 +18,26 @@
+             android:layout_height="250dp"
+             android:orientation="vertical"
+             android:background="@drawable/btn_active_red">
+-
+-            <LinearLayout
+-                android:layout_width="fill_parent"
+-                android:layout_height="wrap_content"
+-                android:orientation="vertical">
+-                <ImageView
+-                    android:id="@+id/proimageView"
+-                    android:layout_width="192dp"
+-                    android:layout_height="192dp"
+-                    android:clickable="true"
+-                    android:src="@drawable/profile"
+-                    android:layout_gravity="center_horizontal"
+-                    android:layout_marginTop="15dp"
+-                    android:focusable="true">
++            <com.mikhaellopez.circularimageview.CircularImageView
++                android:id="@+id/proimageView"
++                android:layout_width="250dp"
++                android:layout_height="250dp"
++                android:src="@drawable/ic_profile"
++                app:civ_border_color="#000000"
++                app:civ_border_width="4dp"
++                app:civ_shadow="true"
++                app:civ_shadow_radius="10dp"
++                app:civ_shadow_color="#000000"/>
++
+ 
+-                </ImageView>
+-            </LinearLayout>
++
+         </LinearLayout>
+ 
+         <LinearLayout
+ 
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+-            android:paddingLeft="15sp">
++            android:paddingStart="15sp">
+ 
+             <TextView
+                 android:layout_width="wrap_content"
+@@ -64,7 +60,7 @@
+         <LinearLayout
+             android:layout_width="fill_parent"
+             android:layout_height="wrap_content"
+-            android:paddingLeft="15sp">
++            android:paddingStart="15sp">
+ 
+             <TextView
+                 android:layout_width="wrap_content"
+Index: app/src/main/java/com/example/final_project/ServiceRegActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.final_project;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.appcompat.widget.Toolbar;\r\n\r\nimport android.app.DatePickerDialog;\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.text.TextUtils;\r\nimport android.util.Patterns;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.DatePicker;\r\nimport android.widget.EditText;\r\nimport android.widget.ProgressBar;\r\nimport android.widget.RadioButton;\r\nimport android.widget.RadioGroup;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.google.android.gms.tasks.OnCompleteListener;\r\nimport com.google.android.gms.tasks.Task;\r\nimport com.google.firebase.auth.AuthResult;\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.Calendar;\r\nimport java.util.HashMap;\r\nimport java.util.Objects;\r\n\r\npublic class ServiceRegActivity extends AppCompatActivity {\r\n\r\n    private EditText mEmail, mPassword, mCpassword, mUsername, mNumber, mDOB ;\r\n    private Button mSubmitbtn , mCustomerBtn, mProviderBtn;\r\n    private ProgressBar mPbar;\r\n    private TextView mLogintv;\r\n    private RadioGroup mRadioGro;\r\n    private RadioButton mRadioBtn;\r\n    private Toolbar toolbar;\r\n    private FirebaseAuth mAuth;\r\n    private DatabaseReference mReference;\r\n    private DatePickerDialog datePickerDialog;\r\n\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_service_reg);\r\n\r\n\r\n\r\n        toolbar = findViewById(R.id.toolbar);\r\n\r\n        mEmail = findViewById(R.id.email);\r\n        mUsername = findViewById(R.id.username);\r\n        mNumber = findViewById(R.id.phNo);\r\n        mDOB = findViewById(R.id.dob);\r\n        mPassword = findViewById(R.id.password);\r\n        mCpassword = findViewById(R.id.cpassword);\r\n        mLogintv = findViewById(R.id.loginTv);\r\n        mSubmitbtn = findViewById(R.id.btnSub);\r\n        mRadioGro = findViewById(R.id.radioGro);\r\n        mCustomerBtn = findViewById(R.id.customerBtn);\r\n        mProviderBtn = findViewById(R.id.providerBtn);\r\n\r\n        mPbar = findViewById(R.id.proBar);\r\n\r\n\r\n        mAuth = FirebaseAuth.getInstance();\r\n        //mReference = FirebaseDatabase.getInstance().getReference(\"serviceProvider\");\r\n\r\n        setSupportActionBar(toolbar);\r\n\r\n        mSubmitbtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                registration();\r\n            }\r\n        });\r\n        mCustomerBtn.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent it = new Intent(ServiceRegActivity.this,RegistrationActivity.class);\r\n                Toast.makeText(ServiceRegActivity.this,\"Registered as a Customer\", Toast.LENGTH_SHORT).show();\r\n\r\n            }\r\n        });\r\n\r\n\r\n\r\n        mDOB.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Calendar calendar = Calendar.getInstance();\r\n                final int year = calendar.get(Calendar.YEAR);\r\n                final int month = calendar.get(Calendar.MONTH);\r\n                final int day = calendar.get(Calendar.DAY_OF_MONTH);\r\n                datePickerDialog = new DatePickerDialog(ServiceRegActivity.this, new DatePickerDialog.OnDateSetListener() {\r\n                    @Override\r\n                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {\r\n                        mDOB.setText(day+\"-\"+(month+1)+\"-\"+year);\r\n\r\n                    }\r\n                },year,month,day);\r\n                datePickerDialog.show();\r\n            }\r\n        });\r\n\r\n    }\r\n\r\n    private void registration() {\r\n        final String email = mEmail.getText().toString().trim();\r\n        final String password = mPassword.getText().toString().trim();\r\n        final String cpassword = mCpassword.getText().toString().trim();\r\n\r\n        final String username = mUsername.getText().toString().trim();\r\n        final String phoneNo = mNumber.getText().toString().trim();\r\n        final String date_of_birth = mDOB.getText().toString().trim();\r\n\r\n        int cheakedId = mRadioGro.getCheckedRadioButtonId();\r\n        RadioButton selected_gender = mRadioGro.findViewById(cheakedId);\r\n\r\n        if (selected_gender == null) {\r\n            Toast.makeText(ServiceRegActivity.this,\"Select Gender please\", Toast.LENGTH_SHORT).show();\r\n        } else {\r\n            final String gender = selected_gender.getText().toString();\r\n        }\r\n\r\n\r\n        if (TextUtils.isEmpty(username)){\r\n\r\n            //String id = mReference.push().getKey();\r\n            //UserHelperClass userHelperClass = new UserHelperClass(username, email, phoneNo, date_of_birth,id);\r\n            //mReference.child(id).setValue(userHelperClass);\r\n            mUsername.setError(\"Username is Required\");\r\n            mUsername.requestFocus();\r\n            return;\r\n        }\r\n        if (TextUtils.isEmpty(cpassword)){\r\n            mCpassword.setError(\"Required\");\r\n            mCpassword.requestFocus();\r\n            return;\r\n        }\r\n        if (TextUtils.isEmpty(email)){\r\n            mEmail.setError(\"Email is Required\");\r\n            mEmail.requestFocus();\r\n            return;\r\n        }\r\n        if (TextUtils.isEmpty(password)){\r\n            mPassword.setError(\"Password is Required\");\r\n            mPassword.requestFocus();\r\n            return;\r\n        }\r\n        if(password.length() < 8) {\r\n            mPassword.setError(\"Password must be 8 characters\");\r\n            mPassword.requestFocus();\r\n            return;\r\n        }\r\n        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){\r\n            mEmail.setError(\"Invalid Email...\");\r\n            mEmail.requestFocus();\r\n            return;\r\n        }\r\n        if (TextUtils.isEmpty(phoneNo)){\r\n            mEmail.setError(\"Phone is Required\");\r\n            mEmail.requestFocus();\r\n            return;\r\n        }\r\n        if (TextUtils.isEmpty(date_of_birth)){\r\n            mDOB.setError(\"Date of Birth is Required\");\r\n            //mDOB.requestFocus();\r\n            return;\r\n        }\r\n        mPbar.setVisibility(View.VISIBLE);\r\n\r\n        //Register the user in Firebase\r\n        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {\r\n            @Override\r\n            public void onComplete(@NonNull Task<AuthResult> task) {\r\n                if (task.isSuccessful()){\r\n                    FirebaseUser rUser = mAuth.getCurrentUser();\r\n                    String email = rUser.getEmail();\r\n                    String userId = rUser.getUid();\r\n                    mReference = FirebaseDatabase.getInstance().getReference(\"ServiceProvider\").child(userId);\r\n                    HashMap<String,String> hashMap = new HashMap<>();\r\n                    hashMap.put(\"userId\",userId);\r\n                    hashMap.put(\"email\",email);\r\n                    hashMap.put(\"username\",username);\r\n                    hashMap.put(\"phoneNumber\",phoneNo);\r\n                    hashMap.put(\"date_of_birth\",date_of_birth);\r\n                    hashMap.put(\"password\",password);\r\n                    //hashMap.put(\"age\",age);  //for age\r\n                    hashMap.put(\"imageURL\",\"\");\r\n                    FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();\r\n                    mReference.child(userId).setValue(hashMap);\r\n\r\n                    mReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {\r\n\r\n                        @Override\r\n                        public void onComplete(@NonNull Task<Void> task) {\r\n                            mPbar.setVisibility(View.VISIBLE);\r\n                            if (task.isSuccessful()) {\r\n                                Intent it = new Intent(ServiceRegActivity.this,loginActivity.class);\r\n                                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |Intent.FLAG_ACTIVITY_NEW_TASK);\r\n                                startActivity(it);\r\n                            } else {\r\n                                Toast.makeText(ServiceRegActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();\r\n                                mPbar.setVisibility(View.GONE);\r\n                            }\r\n\r\n\r\n                        }\r\n                    });\r\n\r\n                }else {\r\n                    mPbar.setVisibility(View.GONE);\r\n                    Toast.makeText(ServiceRegActivity.this, Objects.requireNonNull(task.getException()).getMessage(),Toast.LENGTH_SHORT).show();\r\n\r\n                }\r\n            }\r\n        });\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/example/final_project/ServiceRegActivity.java	(revision 5562067c5fce0a9031baad269a894c58d568f9f1)
++++ app/src/main/java/com/example/final_project/ServiceRegActivity.java	(date 1614942038368)
+@@ -74,7 +74,7 @@
+ 
+         setSupportActionBar(toolbar);
+ 
+-        mSubmitbtn.setOnClickListener(new View.OnClickListener() {
++        /*mSubmitbtn.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 registration();
+@@ -87,7 +87,7 @@
+                 Toast.makeText(ServiceRegActivity.this,"Registered as a Customer", Toast.LENGTH_SHORT).show();
+ 
+             }
+-        });
++        });*/
+ 
+ 
+ 
