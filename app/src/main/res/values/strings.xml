@@ -41,6 +41,7 @@
     <string name="car_mechanic">Car_Mechanic</string>
     <string name="com_repair">Com_Repair</string>
     <string name="mob_repair">Mob_Repair</string>
+    <string name="upload_pic">Upload Pic</string>
 
 
     <array name="skills">

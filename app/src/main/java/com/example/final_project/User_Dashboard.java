@@ -28,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -49,7 +50,7 @@ public class User_Dashboard extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
     private ActionBarDrawerToggle toggle;
-    private ImageView dashboardImage;
+    private ShapeableImageView profileImageView;
     private TextView profileUsername, navName, navEmail;
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -57,12 +58,15 @@ public class User_Dashboard extends AppCompatActivity {
     String profileUserName, profileEmail;
 
 
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__dashboard);
         ProfileActivity profileActivity = new ProfileActivity();
 
+
+        profileImageView = findViewById(R.id.dashboardimg);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -78,8 +82,6 @@ public class User_Dashboard extends AppCompatActivity {
                     new ProfileFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_profile);
         }
-
-        dashboardImage = findViewById(R.id.dashboardimg);
 
         //init firebase
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -121,8 +123,6 @@ public class User_Dashboard extends AppCompatActivity {
 
             }
         });
-
-
 
 
        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {

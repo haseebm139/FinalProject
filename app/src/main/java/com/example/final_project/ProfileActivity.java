@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -48,7 +49,7 @@ import java.util.HashMap;
 public class ProfileActivity extends AppCompatActivity {
 
 
-    private ImageView profileImageView;
+    private ShapeableImageView profileImageView;
     private TextView uploadProbtn, mUser, mEmail, mPhone;
     private StorageReference storageReference;
     private static final int GALLERY_REQUEST = 1000;
@@ -66,10 +67,10 @@ public class ProfileActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
-
         mAuth = FirebaseAuth.getInstance();
         storageReference = FirebaseStorage.getInstance().getReference();
-        StorageReference profileRef = storageReference.child("Users"+mAuth.getCurrentUser().getUid()+"profile.jpg");
+        StorageReference profileRef = storageReference.child(mAuth.getCurrentUser().getUid());
+
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
@@ -77,8 +78,8 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        profileImageView = (ImageView) findViewById(R.id.proimageView);
-        uploadProbtn = (TextView) findViewById(R.id.uploadpro);
+        profileImageView = findViewById(R.id.proimageView);
+        uploadProbtn = findViewById(R.id.uploadpro);
 
         mUser = findViewById(R.id.tvname);
         mEmail = findViewById(R.id.tvemail);
@@ -119,12 +120,20 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            if(requestCode == GALLERY_REQUEST){
+            if(requestCode ==  GALLERY_REQUEST){
                 if(resultCode == Activity.RESULT_OK){
                     if(data != null){
                         Uri imageUri = data.getData();
-
                         uploadImageToFirebase(imageUri);
+                        CropImage.activity(imageUri).start(this);
+                    }
+                    if(requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+                        CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                            if(resultCode == RESULT_OK){
+                                Uri imageUri = result.getUri();
+                            }else if(resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE){
+                                Exception error = result.getError();
+                            }
                     }
                 }
             }
@@ -132,7 +141,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void uploadImageToFirebase(Uri imageUri) {
         // upload image to firebase database
-        final StorageReference fileRef = storageReference.child("Users"+mAuth.getCurrentUser().getUid()+"profile.jpg");
+        final StorageReference fileRef = storageReference.child(mAuth.getCurrentUser().getUid());
         fileRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

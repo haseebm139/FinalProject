@@ -4,7 +4,8 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,31 +13,37 @@
         tools:context=".ProfileActivity"
         android:orientation="vertical">
 
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="300dp"
             android:orientation="vertical"
-            android:background="@drawable/btn_active_red">
+            android:background="#FF00">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/proimageView"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="30dp"
                     android:src="@drawable/profile"
-                    android:layout_gravity="center_horizontal">
-                </ImageView>
+                    android:layout_gravity="center_horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:srcCompat="@mipmap/ic_launcher"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent">
+                </com.google.android.material.imageview.ShapeableImageView>
+
                 <TextView
                     android:id="@+id/uploadpro"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Upload Pic"
+                    android:text="@string/upload_pic"
+                    android:layout_marginTop="10dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_horizontal"/>
