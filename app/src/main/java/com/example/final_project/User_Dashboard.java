@@ -131,9 +131,8 @@ public class User_Dashboard extends AppCompatActivity {
                 drawerLayout.closeDrawer(GravityCompat.START);
                 switch (item.getItemId()){
                     case R.id.nav_profile:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                                new ProfileFragment()).commit();
-                        Toast.makeText(User_Dashboard.this, "Profile", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(User_Dashboard.this, ProfileActivity.class));
+
                         break;
 
                     case R.id.nav_Navigation:
