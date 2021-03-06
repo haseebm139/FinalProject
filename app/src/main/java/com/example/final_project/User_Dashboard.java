@@ -187,8 +187,6 @@ public class User_Dashboard extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(User_Dashboard.this, loginActivity.class));
-            case R.id.profile:
-                startActivity(new Intent(User_Dashboard.this, ProfileActivity.class));
 
         }
         return true;
