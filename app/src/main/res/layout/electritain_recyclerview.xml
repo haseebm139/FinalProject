@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ElectritianActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:background="#ffffff"
+        >
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:cardCornerRadius="60dp"
+            android:id="@+id/cvImage"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp">
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:scaleType="centerCrop"/>
+        </androidx.cardview.widget.CardView>
+        <TextView
+            android:id="@+id/eleName"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:text="Name"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/cvImage"
+            android:layout_marginLeft="50dp"
+            >
+
+        </TextView>
+        <TextView
+            android:id="@+id/elecLoc"
+            android:layout_width="140dp"
+            android:layout_height="30dp"
+            android:text="Location"
+            android:textSize="15sp"
+            android:layout_toRightOf="@id/cvImage"
+            android:layout_below="@id/eleName"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="50dp"
+            >
+
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:textColor="#CDC7C7"
+            android:id="@+id/elecUnderLine"
+            android:layout_marginTop="-3dp"
+            android:layout_below="@+id/cvImage"
+            android:layout_marginLeft="20dp">
+
+        </TextView>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

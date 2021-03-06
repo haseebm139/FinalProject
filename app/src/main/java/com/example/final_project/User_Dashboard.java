@@ -30,6 +30,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.common.base.MoreObjects;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -205,6 +206,7 @@ public class User_Dashboard extends AppCompatActivity {
     }
 
     public void electriBtn(View view) {
+        Toast.makeText(User_Dashboard.this,"Electrition Option",Toast.LENGTH_SHORT).show();
         startActivity(new Intent(User_Dashboard.this,ElectritianActivity.class));
     }
 }
