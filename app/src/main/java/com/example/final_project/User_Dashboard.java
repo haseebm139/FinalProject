@@ -58,6 +58,7 @@ public class User_Dashboard extends AppCompatActivity {
     String profileUserName, profileEmail;
 
 
+
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,5 +202,9 @@ public class User_Dashboard extends AppCompatActivity {
         }
 
 
+    }
+
+    public void electriBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,ElectritianActivity.class));
     }
 }
