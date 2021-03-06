@@ -261,6 +261,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/ac_repair"
                                     android:text="@string/ac_mechanic"
+                                    android:onClick="acMechBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -269,6 +270,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/carpenter"
                                     android:text="@string/carpenter"
+                                    android:onClick="carpenterBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold"
                                     tools:ignore="ButtonStyle" />
@@ -278,6 +280,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/plumber"
                                     android:text="@string/plumber"
+                                    android:onClick="plumberBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -286,6 +289,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/mob_repair"
                                     android:text="@string/mob_repair"
+                                    android:onClick="mobRepBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -294,6 +298,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/com_repair"
                                     android:text="@string/com_repair"
+                                    android:onClick="comRepBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 
@@ -302,6 +307,7 @@
                                     android:layout_height="wrap_content"
                                     android:drawableTop="@drawable/car_mechanic"
                                     android:text="@string/car_mechanic"
+                                    android:onClick="carMecBtn"
                                     android:textSize="12sp"
                                     android:textStyle="bold" />
 

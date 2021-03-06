@@ -204,7 +204,31 @@ public class User_Dashboard extends AppCompatActivity {
     }
 
     public void electriBtn(View view) {
-        Toast.makeText(User_Dashboard.this,"Electrition Option",Toast.LENGTH_SHORT).show();
+
         startActivity(new Intent(User_Dashboard.this,ElectritianActivity.class));
+    }
+
+    public void acMechBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,Ac_MechanicActivity.class));
+    }
+
+    public void carpenterBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,CarpenterActivity.class));
+    }
+
+    public void mobRepBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,Mob_RepActivity.class));
+    }
+
+    public void plumberBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,PlumberActivity.class));
+    }
+
+    public void comRepBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,Com_RepActivity.class));
+    }
+
+    public void carMecBtn(View view) {
+        startActivity(new Intent(User_Dashboard.this,Car_MechanicActivity.class));
     }
 }

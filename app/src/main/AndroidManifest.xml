@@ -12,7 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ElectritianActivity"></activity>
+        <activity android:name=".Car_MechanicActivity"></activity>
+        <activity android:name=".Com_RepActivity" />
+        <activity android:name=".Mob_RepActivity" />
+        <activity android:name=".PlumberActivity" />
+        <activity android:name=".CarpenterActivity" />
+        <activity android:name=".Ac_MechanicActivity" />
+        <activity android:name=".ElectritianActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
